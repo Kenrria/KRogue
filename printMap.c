@@ -1,15 +1,18 @@
+/*
+ * Just print the map using the standar output
+ */ 
 #include <stdio.h>
 #include "Maps.h"
 
 
 void printMap(int map[mapRows][mapColumns], int rows,int columns);
 
-/*int main () {
+int main () {
 	
 	printMap(mapWalls1Ascii, mapRows, mapColumns);
 
 	return 0;
-}*/
+}
 
 
 void printMap(int map[mapRows][mapColumns], int rows,int columns){
@@ -21,14 +24,3 @@ void printMap(int map[mapRows][mapColumns], int rows,int columns){
 		printf("\n");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
