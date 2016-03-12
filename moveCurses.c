@@ -1,5 +1,7 @@
-/* A very small game, it's just a character '@' moving around the terminal */
+
+/* A very small game, it's just a character '@' moving around the terminal within a map */
 /* Press 'q' for exit, and 'w','s','a','d' for moving */
+
 #include <curses.h> 
 #include "Maps.h"
 
@@ -24,8 +26,9 @@ int main() {
 	
 
 	posX = 0; posY = 0;
-	insch('@');
 	printMap(mapWalls1Ascii, mapRows, mapColumns);	// draw the initial map
+	move(posX,posY);
+	insch('@');
 	while (1){					// Start the game, wait for player imput
 		d = getch();			
 		if (d == 'q') break;	// Exit!
@@ -42,8 +45,6 @@ int main() {
 void draw(char d){
 	if (checkMovement(d)) {
 		if ( d == 'd') {			// Move Right
-			//delch();
-			//mvaddch(posY,posX,'.');	// Write the blank cell
 			posX++;
 			mvdelch(posY,posX);		// Delete the previous '@'
 			move(posY,posX);
@@ -51,7 +52,6 @@ void draw(char d){
 			refresh(); 
 		}
 		if ( d == 'a') {			// Move Lef
-			//delch();
 			posX--;
 			mvdelch(posY,posX);
 			move(posY,posX);
@@ -59,7 +59,6 @@ void draw(char d){
 			refresh(); 
 		}
 		if ( d == 'w') {			// Move Up
-			//delch();
 			posY--;
 			mvdelch(posY,posX);
 			move(posY,posX);
@@ -67,7 +66,6 @@ void draw(char d){
 			refresh(); 
 		}
 		if ( d == 's') {			// Move Down
-			//delch();
 			posY++;
 			mvdelch(posY,posX);
 			move(posY,posX);
@@ -110,15 +108,8 @@ void printMap(int map[mapRows][mapColumns], int rows,int columns){
 	int i,j;
 	for ( i = 0; i < rows ; i++ ) {
 		for ( j = 0; j < columns ; j++){
-			//printw("%c", map[i][j]);	
-			//if ( i==posX && j ==posY) {
-				//mvaddch(posY,posX,'@');
-			//}
-			//else {
-				mvaddch(i,j,map[i][j]);
-			//}
+			mvaddch(i,j,map[i][j]);
 		}
-		//printw("\n");
 	}
 }
 
