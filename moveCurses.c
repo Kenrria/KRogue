@@ -1,6 +1,8 @@
+/* A very small game, it's just a character '@' moving around the terminal */
+/* Press 'q' for exit, and 'w','s','a','d' for moving */
 #include <curses.h> 
 
-int posX,posY,nrows,ncols;  	
+int posX,posY,nRows,nCols;  	// Actual character position and terminal size
 
 void draw(char d);
 
@@ -8,24 +10,24 @@ int checkMovement(char d);
 
 int main() { 
 	int i;  char d;  
-	WINDOW *wnd;				// Puntero del tipo ventana con la ventana que vamos a usar
+	WINDOW *wnd;				// The game window
 
-	wnd = initscr();			// Inicializamos la ventana
-	cbreak();					// No esperaremos un enter, es decir, siguiente linea
-	noecho();					// Desactivamos el echoing, es decir, que aparezca lo que escribimos
-	getmaxyx(wnd,nrows,ncols);	// getTamañoVentana
-	clear();					// Limpiar ventana y mandar el cursor a la posición (0,0)
-	refresh();					// refrescar, es decir, que aparezcan los últimos cambios 
+	wnd = initscr();			// Some first window related steps
+	cbreak();					
+	noecho();				
+	getmaxyx(wnd,nRows,nCols);	
+	clear();					
+	refresh();					 
 
 	posX = 0; posY = 0;
 	insch('@');
-	while (1){
-		d = getch();			// leer desde el teclado
-		if (d == 'q') break;	// q para salir
-		draw(d);				// dibujar lo leído
+	while (1){					// Start the game, wait for player imput
+		d = getch();			
+		if (d == 'q') break;	// Exit!
+		draw(d);				// Try to move the character
 	}
 
-	endwin();					// Cierra la ventana 
+	endwin();					// Close it
 	return 0;
 }
 
@@ -65,31 +67,31 @@ void draw(char d){
 
 /* Check window boundaries*/
 int checkMovement(char d){
-	if ( d == 'd'){					// right
-		if (posX+1 > ncols){
+	if ( d == 'd'){					// Check right
+		if (posX+1 > nCols){
 			return 0;
 		}
 		return 1;
 	}
-	if ( d == 'a'){					// left
+	if ( d == 'a'){					// Check left
 		if (posX-1 < 0){
 			return 0;
 		}
 		return 1;
 	}
-	if ( d == 'w'){					// Up
+	if ( d == 'w'){					// Check  Up
 		if (posY-1 < 0){
 			return 0;
 		}
 		return 1;
 	}
-	if ( d == 's'){					// Down
-		if ( posY+1 > nrows){
+	if ( d == 's'){					// Check Down
+		if ( posY+1 > nRows){
 			return 0;
 		}
 		return 1;
 	}
-}
+}  
 
 
 
