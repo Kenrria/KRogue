@@ -27,19 +27,19 @@ generation: programming, algorithms, maths...
 
 ## Programming Links
 
-[API libreria Ncurses](http://invisible-island.net/ncurses/man/ncurses.3x.html): Ncurses library Api
+[API Ncurses](http://invisible-island.net/ncurses/man/ncurses.3x.html): Ncurses library Api
 a must to use terminals without reinventing the wheel.
 
-[Pequeño tutorial Ncurses](http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf): 
+[Small Ncurses turorial](http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf): 
 Small tutorial about Ncurses ( 10 pages ) well writen, comented, with examples and using linux.
 
 ## Development stpes
 
 ### Decidirse a escribir un juego
 
-Ideas sobre el juego, abiertas a modificaciones
+Ideas about the game, rigth now the only stable idea is to make a roguelike game.
 
-### Hola Mundo!
+### Hello world!
 
 **Text Editor used:** gedit with markdown plugin, integrated Terminal and side panel with documents and
 folders, also C syntax highlighting.
@@ -48,6 +48,12 @@ folders, also C syntax highlighting.
 
 **Plataform (OS):** Ubuntu 14.04 Desktop 64 bits
 
-
-
-### Es un niño!
+### It's a boy
+Things it does:
+- [x] It moves
+- [x] There are collisions
+- [x] There are boundaries
+- [x] Also doors
+Things to do:
+- [ ] make a notification area (Health, position , Messages...)
+- [ ] Make the message handling routines to make debugging much easier (text as a log file)
