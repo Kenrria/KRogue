@@ -1,3 +1,7 @@
+/*
+ * Some maps in a matrix format
+ * Write #include "Maps.h" to use it 
+ */
 #define mapRows 15
 #define mapColumns 20
 
@@ -36,6 +40,7 @@ int mapWalls1[mapRows][mapColumns]= {
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
 
+// Ascii map
 int mapWalls1Ascii[mapRows][mapColumns]= {
 	{ 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46 },
     { 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46 },
