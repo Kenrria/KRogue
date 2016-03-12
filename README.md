@@ -54,6 +54,7 @@ Things it does:
 - [x] There are collisions
 - [x] There are boundaries
 - [x] Also doors
+
 Things to do:
 - [ ] make a notification area (Health, position , Messages...)
 - [ ] Make the message handling routines to make debugging much easier (text as a log file)
