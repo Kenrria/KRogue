@@ -1,8 +1,11 @@
 /* A very small game, it's just a character '@' moving around the terminal */
 /* Press 'q' for exit, and 'w','s','a','d' for moving */
 #include <curses.h> 
+#include "Maps.h"
 
 int posX,posY,nRows,nCols;  	// Actual character position and terminal size
+
+void printMap(int map[mapRows][mapColumns], int rows,int columns); // 12 y 175
 
 void draw(char d);
 
@@ -16,15 +19,19 @@ int main() {
 	cbreak();					
 	noecho();				
 	getmaxyx(wnd,nRows,nCols);	
-	clear();					
-	refresh();					 
+	clear();	
+	refresh();	
+	
 
 	posX = 0; posY = 0;
 	insch('@');
+	printMap(mapWalls1Ascii, mapRows, mapColumns);	// draw the initial map
 	while (1){					// Start the game, wait for player imput
 		d = getch();			
 		if (d == 'q') break;	// Exit!
+		printMap(mapWalls1Ascii, mapRows, mapColumns);
 		draw(d);				// Try to move the character
+		move(posY,posX);
 	}
 
 	endwin();					// Close it
@@ -35,29 +42,34 @@ int main() {
 void draw(char d){
 	if (checkMovement(d)) {
 		if ( d == 'd') {			// Move Right
-			delch();
+			//delch();
+			//mvaddch(posY,posX,'.');	// Write the blank cell
 			posX++;
+			mvdelch(posY,posX);		// Delete the previous '@'
 			move(posY,posX);
 			insch('@');	
 			refresh(); 
 		}
 		if ( d == 'a') {			// Move Lef
-			delch();
+			//delch();
 			posX--;
+			mvdelch(posY,posX);
 			move(posY,posX);
 			insch('@');	
 			refresh(); 
 		}
 		if ( d == 'w') {			// Move Up
-			delch();
+			//delch();
 			posY--;
+			mvdelch(posY,posX);
 			move(posY,posX);
 			insch('@');	
 			refresh(); 
 		}
 		if ( d == 's') {			// Move Down
-			delch();
+			//delch();
 			posY++;
+			mvdelch(posY,posX);
 			move(posY,posX);
 			insch('@');	
 			refresh(); 
@@ -91,20 +103,24 @@ int checkMovement(char d){
 		}
 		return 1;
 	}
-}  
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
+void printMap(int map[mapRows][mapColumns], int rows,int columns){
+	int i,j;
+	for ( i = 0; i < rows ; i++ ) {
+		for ( j = 0; j < columns ; j++){
+			//printw("%c", map[i][j]);	
+			//if ( i==posX && j ==posY) {
+				//mvaddch(posY,posX,'@');
+			//}
+			//else {
+				mvaddch(i,j,map[i][j]);
+			//}
+		}
+		//printw("\n");
+	}
+}
 
 
 
