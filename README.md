@@ -1,4 +1,4 @@
-# Memoria desarrollo de un pequeño juego Rogue-Like
+# Development of a samll rogue like game, very small
 
 The goal of this memory is to keep track on the development of a samll rogue-like game from the very
 start till the end.
