@@ -35,7 +35,7 @@ Small tutorial about Ncurses ( 10 pages ) well writen, comented, with examples a
 
 ## Development steps
 
-### Decidirse a escribir un juego
+### Decide to write a game 
 
 Ideas about the game, rigth now the only stable idea is to make a roguelike game.
 
