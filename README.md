@@ -58,3 +58,6 @@ Things it does:
 Things to do:
 - [ ] make a notification area (Health, position , Messages...)
 - [ ] Make the message handling routines to make debugging much easier (text as a log file)
+
+Extra things:
+- [x] A map editor (mapCreator.c and MapsUser.h): it allows the player to create his own maps (right now it only has blank, wall and door cells).
