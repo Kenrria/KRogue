@@ -1,6 +1,8 @@
 
 /* File: mapCreator.c
-
+   Author: Jesus Cruz
+   Time spent: about 2:30 hours
+   
 	This program will be used to create a map using the terminal and the library Ncurses
 	
 	First it asks the user to write the number of the new map.
@@ -8,7 +10,7 @@
 	Using the cursor and some keys you can modify the blank map
 	After quiting the map will be saved if the file MapsUser.h
 
-	Keys: ( press each the key twice )
+	Keys: ( press each key twice )
 	- 'q' for quiting
 	- '#' for writing walls with the cursor
 	- '+' for doors
@@ -17,6 +19,7 @@
 
 	How to use it: first you have to select what you want to place in the map: walls(w), doors(d),
 	or removing(r). Once you have selected the item move the cursor to write it.
+	If you want to edit one position type the cell type you want and then 'm'.
 
 */
 
@@ -118,7 +121,6 @@ void draw(char d, char cellContent){
 	refresh(); 
 }
 
-
 int main (){
 	
 	char mapName[50];
@@ -136,9 +138,7 @@ int main (){
 		}
 	}
 
-	printMap(test2, mapRows, mapColumns);
 
-	return 0;
 	char d, mode;
 	WINDOW *wnd;				// The game window
 	wnd = initscr();			// Some first window related steps
@@ -167,12 +167,7 @@ int main (){
 		draw(d, mode);
 	}
 
-	endwin();					// Close it
-
-
-
-
-
+	endwin();
 
 	// Now we had the next string: "int "mapName"[15][20]= {"
 	strcpy( mapHeader, "int ");
