@@ -10,7 +10,7 @@
 	Using the cursor and some keys you can modify the blank map
 	After quiting the map will be saved if the file MapsUser.h
 
-	Keys: ( press each key twice )
+	Keys, fist press ':' if you want to change your pencil
 	- 'q' for quiting
 	- '#' for writing walls with the cursor
 	- '+' for doors
@@ -89,6 +89,12 @@ int checkMovement(char d){
 	}
 }
 
+int checkChar(char cellContent){
+	if ( cellContent!='.' && cellContent != '+' && cellContent !='#' && cellContent != 'r' && cellContent != 'm') {
+		return 0;
+	}
+	return 1;
+}
 
 /* Check the movement and draw it in the window */
 void draw(char d, char cellContent){
@@ -139,7 +145,7 @@ int main (){
 	}
 
 
-	char d, mode;
+	char d, mode, previousMode;
 	WINDOW *wnd;				// The game window
 	wnd = initscr();			// Some first window related steps
 	cbreak();					
@@ -149,22 +155,17 @@ int main (){
 
 	mode = '.';
 	while (1){					// Start the game, wait for player imput
-		d = getch();			
-		if (d == 'q') break;	// Exit!
-		if (d == '#') {			// Time for walls!
-			mode = '#';
+		d = getch();
+		if (d != ':') {
+			draw(d,mode);
 		}
-		if (d == 'r') {			// 
-			mode = '.';
-		}	
-		if (d == '+') {			// 
-			mode = '+';
-		}	
-		if (d == 'm') {
-			mode = 'm';
+		if (d == 'q') break;
+		if (d == ':' ) {
+			previousMode = mode;
+			mode = getch();	
+			if (checkChar(mode) == 0 ) mode = previousMode;	
+			if ( mode == 'r' ) mode = ' ';		
 		}
-		d = getch();		
-		draw(d, mode);
 	}
 
 	endwin();
@@ -179,5 +180,4 @@ int main (){
 
 	return 0;
 }
-
 
