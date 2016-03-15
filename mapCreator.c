@@ -10,7 +10,7 @@
 	Using the cursor and some keys you can modify the blank map
 	After quiting the map will be saved if the file MapsUser.h
 
-	Keys, fist press ':' if you want to change your pencil
+	Keys, first press ':' if you want to change your pencil
 	- 'q' for quiting
 	- '#' for writing walls with the cursor
 	- '+' for doors
