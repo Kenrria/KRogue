@@ -1,7 +1,7 @@
 
 /* File: mapCreator.c
    Author: Jesus Cruz
-   Time spent: about 2:30 hours
+   Time spent: about 8 hours
    
 	This program will be used to create a map using the terminal and the library Ncurses
 	
