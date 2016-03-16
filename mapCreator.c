@@ -10,8 +10,9 @@
 	Using the cursor and some keys you can modify the blank map
 	After quiting the map will be saved if the file MapsUser.h
 
-	Keys, first press ':' if you want to change your pencil
-	- 'q' for quiting
+	Keys: first press ':' if you want to change your pencil,then on the next keys
+	- 'q' for quiting without saving
+	- 'g' for saving
 	- '#' for writing walls with the cursor
 	- '+' for doors
 	- 'r' for removing
@@ -89,6 +90,7 @@ int checkMovement(char d){
 	}
 }
 
+/* Check if the char is a valid one, if yes return 1*/
 int checkChar(char cellContent){
 	if ( cellContent!='.' && cellContent != '+' && cellContent !='#' && cellContent != 'r' && cellContent != 'm') {
 		return 0;
@@ -113,18 +115,34 @@ void draw(char d, char cellContent){
 			posY++;
 		}
 	}
-
+	/* If the char is 'm' it means moving without drawing */
 	if ( cellContent == 'm'){
 		move(posY,posX);
 		refresh();
 		return;
 	}
+	/* In other cases draw the valid character */
+	else{
+		mvdelch(posY,posX);
+		move(posY,posX);
+		insch(cellContent);
+		temporalMap[posY][posX] = (int) cellContent;
+		refresh(); 
+	}
+}
 
-	mvdelch(posY,posX);
-	move(posY,posX);
-	insch(cellContent);
-	temporalMap[posY][posX] = (int) cellContent;
-	refresh(); 
+/* Update the notification window with the actual pencil */
+void updateEchoWindow(WINDOW *echoWindow,WINDOW *map,char mode){
+
+	mvwprintw(echoWindow, 0, 0, "Printing:" );
+	char aux[2];
+	aux[0]=mode;
+	aux[1]='\0';						// We mark the end of the char[]
+	mvwprintw(echoWindow,0,10, aux);	// We show the actual pencil
+	wrefresh(echoWindow);				// show the changes in the window
+	wmove(map,posY,posX);				// And move the cursor to the main window 
+
+
 }
 
 int main (){
@@ -145,29 +163,35 @@ int main (){
 	}
 
 
-	char d, mode, previousMode;
-	WINDOW *wnd;				// The game window
-	wnd = initscr();			// Some first window related steps
-	cbreak();					
-	noecho();				
-	clear();	
-	refresh();	
+	// Here goes the window related code and the main loop
+	char d, mode = '.', previousMode;
 
-	mode = '.';
-	while (1){					// Start the game, wait for player imput
-		d = getch();
+	initscr();
+	noecho();
+
+	// Two windows, map is where we draw and echoWindow is a small notification area
+	WINDOW *map = newwin(25,100,0,0);				
+	WINDOW *echoWindow = newwin(1,20,26,0);
+
+	// Main loop, right now is an active wait, not good
+	while (1){	
+		updateEchoWindow(echoWindow,map,mode);		// We update the notification area
+		d = wgetch(map);							// is there any imput? if not continue
 		if (d != ':') {
 			draw(d,mode);
 		}
-		if (d == 'q') break;
+		if (d == 'q') return 0;
+		if (d == 'g') break;
 		if (d == ':' ) {
 			previousMode = mode;
 			mode = getch();	
 			if (checkChar(mode) == 0 ) mode = previousMode;	
 			if ( mode == 'r' ) mode = ' ';		
+			draw(d,mode);
 		}
 	}
 
+	// Close the windows 
 	endwin();
 
 	// Now we had the next string: "int "mapName"[15][20]= {"
