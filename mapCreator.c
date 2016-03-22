@@ -1,7 +1,7 @@
 
 /* File: mapCreator.c
    Author: Jesus Cruz
-   Time spent: about 8 hours
+   Time spent: about 2:30 hours
    
 	This program will be used to create a map using the terminal and the library Ncurses
 	
@@ -162,7 +162,8 @@ int main (){
 		}
 	}
 
-
+	//printMap(test5,mapRows,mapColumns);
+	//return 0;
 	// Here goes the window related code and the main loop
 	char d, mode = '.', previousMode;
 
@@ -180,7 +181,7 @@ int main (){
 		if (d != ':') {
 			draw(d,mode);
 		}
-		if (d == 'q') return 0;
+		if (d == 'q') { endwin();return 0; }
 		if (d == 'g') break;
 		if (d == ':' ) {
 			previousMode = mode;
