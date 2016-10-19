@@ -33,6 +33,10 @@ a must to use terminals without reinventing the wheel.
 [Small Ncurses turorial](http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf): 
 Small tutorial about Ncurses ( 10 pages ) well writen, comented, with examples and using linux.
 
+## Compiling
+
+You need ncruses library, gcc -o demo moveCurses.c -lncurses
+
 ## Development steps
 
 ### Decide to write a game 
